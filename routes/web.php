@@ -31,4 +31,4 @@ Route::get('custom/login','CustomeController@login');
 Route::get('custom/login/{id}','CustomeController@Customlogin');
 
 Route::get('issues/list','IssuesController@list');
-Route::get('users','UsersController@export');
+//Route::get('users','UsersController@export');
