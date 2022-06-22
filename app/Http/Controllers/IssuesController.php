@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Imports\IssuesImport;
 use App\Issue;
 use Illuminate\Http\Request;
 use App\Mail\IssueRequstSubmitted;
 use Auth;
 use App\user;
+use Maatwebsite\Excel\Facades\Excel;
+use Alert;
+
 class IssuesController extends Controller
 {
     public function __construct()
@@ -39,11 +42,28 @@ class IssuesController extends Controller
 
         \Mail::to($issue->emmil)->send(new IssueRequstSubmitted($issue));
          return "recorde crated succssfuly";
+
+
+
+
         }
 
         public function test()
         {
             return " This is test function";
+        }
+
+
+        public function importFromExcel(Request $request)
+        {
+
+         //validate excl file
+
+            Excel::import(new IssuesImport, $request->excelFile);
+            Alert::success('Successfully', 'Go');
+            return back();
+
+
         }
 }
 
